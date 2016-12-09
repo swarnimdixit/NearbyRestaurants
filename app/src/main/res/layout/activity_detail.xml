@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.swarnim_d.nearbyrestaurants.Activity.DetailActivity"
+    android:onClick="hideKeyboard">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/imageRLDetailFragment"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:onClick="hideKeyboard"
+    >
+    <ImageView
+        android:id="@+id/imageIVDetailFragment"
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/default_image"
+        android:layout_height="250dp"
+        android:scaleType="fitXY">
+        </ImageView>
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_centerVertical="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignBottom="@+id/imageIVDetailFragment"
+        android:id="@+id/ratingTVOnIVDetailFragment"
+        android:background="@color/colorAccent"
+        android:text="4.4/5"
+        android:textColor="@android:color/background_light"
+        android:autoText="true"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:typeface="monospace">
+        </TextView>
+</RelativeLayout>
+
+    <TextView
+        android:id="@+id/restaurantTVDetailFrag"
+        android:text="Restaurants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageRLDetailFragment"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:autoText="false"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:textColor="#e54043"
+        android:typeface="serif"
+        android:layout_marginTop="10dp"
+        android:shadowColor="@color/cast_intro_overlay_background_color"
+        android:background="#2affb2d4" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/restaurantTVDetailFrag"
+        android:background="@color/colorPrimary">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/childLLDetailFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingTop="35dp"
+                android:onClick="hideKeyboard">
+
+                <LinearLayout
+                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="20dp">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Cuisine : "
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="Veg, Continental"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="#51a944"
+                        android:id="@+id/cusineTVDetailFrag" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="20dp">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Cost for 2 : "
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="1200 Rps"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:id="@+id/costTVDetailFrag" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="20dp">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Locality : "
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="Bangalore"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+                        android:id="@+id/localityTVDetailFrag" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="20dp">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Level : "
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:text="Bad | Good  | Very Good"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@android:color/background_light"
+                        android:id="@+id/ratingTextTVDetailFrag"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="20dp">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Votes : "
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="1034"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:id="@+id/votesTVDetailFrag" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_height="120dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="20dp"
+                    android:background="@color/cast_expanded_controller_text_color">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:text="Address : "
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:id="@+id/addressTVDetailFragment"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="1034"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:id="@+id/imageIBDetailFragment"
+                        android:background="@drawable/image_direction"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/cast_expanded_controller_text_color">
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:text=" "
+                        android:paddingLeft="10dp"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:id="@+id/reviewTVDetailFragment"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/reviewLLDetailFragment"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:id="@+id/reviewETDetailFragment"
+                        android:layout_weight="1"
+                        android:background="@color/cast_expanded_controller_progress_text_color"
+                        android:hint="Give review here..."
+                        android:layout_height="80dp"
+                        android:editable="false"/>
+
+                    <Button
+                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:text="Submit"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/reviewSubmitBtnDetailFragment"
+                        android:background="@android:color/holo_red_light" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>
