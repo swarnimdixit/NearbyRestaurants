@@ -82,7 +82,8 @@ public class DBHelper extends SQLiteOpenHelper {
            contentValues.put("votes",mVOTES);
            contentValues.put("thumbnail",mIMAGE);
 
-        db.insert(TABLE_NAME, null, contentValues);
+           db.insert(TABLE_NAME, null, contentValues);
+
        }
        catch (Exception e)
        {e.printStackTrace();Toast.makeText(mcontext, "exceptionn"+e, Toast.LENGTH_SHORT).show();}

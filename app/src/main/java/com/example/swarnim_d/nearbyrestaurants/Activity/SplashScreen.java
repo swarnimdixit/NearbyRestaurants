@@ -76,8 +76,9 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                checkGPSEnabled();
+
                 checkLocationPerm();
+                checkGPSEnabled();
                 // This method will be executed once the timer is over
                 // Start your app main activity
                         Intent intent = new Intent(SplashScreen.this,MapActivity.class);

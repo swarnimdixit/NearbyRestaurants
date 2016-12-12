@@ -34,7 +34,6 @@ import retrofit.Retrofit;
 
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener,GoogleMap.OnInfoWindowClickListener {
-    private static final int PERMISSION_REQUEST_CODE = 1;
     public GoogleMap mMap;
     Double lat;
     Double lon;
@@ -116,7 +115,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         mapActivityRL = (RelativeLayout)findViewById(R.id.activity_map);
 
-        Snackbar snackbar = Snackbar.make(mapActivityRL, "Best Hotels Around You", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(mapActivityRL, "                  Best Hotels Around You               ", Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
 
         checkStoragePerm();

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -49,16 +50,17 @@ public class DetailActivity extends AppCompatActivity {
     String REVIEW ;
     String VOTES;
     //----------------- hide keyboard when editText not in Focus
-//    public void hideKeyboard(View view) {
-//        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-//    }
+    public void hideKeyboard(View view) {
+        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
 
         imageViewDetailActivity = (ImageView)findViewById(R.id.imageIVDetailFragment);
         nameTVDetailActivity = (TextView)findViewById(R.id.restaurantTVDetailFrag);
@@ -76,6 +78,8 @@ public class DetailActivity extends AppCompatActivity {
         reviewTVDetailActivity = (TextView)findViewById(R.id.reviewTVDetailFragment);
         activity_detailRL = (RelativeLayout)findViewById(R.id.activity_detail);
         reviewLLDetailActivity.setVisibility(View.VISIBLE);
+
+
 
             //----------------- receiving hotelid from map activity------------
        hotelName =getIntent().getStringExtra("hotelname");
@@ -124,6 +128,8 @@ public class DetailActivity extends AppCompatActivity {
         }
 
 
+
+
         imageNavigationIBDetailActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,30 +147,36 @@ public class DetailActivity extends AppCompatActivity {
                 .into(imageViewDetailActivity);
 
         if(REVIEW != null) {
-            reviewTVDetailActivity.setText(REVIEW);
+            reviewTVDetailActivity.setText("Review: "+REVIEW);
             reviewLLDetailActivity.setVisibility(View.INVISIBLE);
         }
 
         reviewSubmitBtnDetailFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              String review =  reviewETDetailFragment.getText().toString();
-                DBHelper db = new DBHelper(getApplicationContext());
-                db.insertReview(review,hotelName);
-                reviewLLDetailActivity.setVisibility(View.INVISIBLE);
+                String review = reviewETDetailFragment.getText().toString();
+                if(review !="") {
+                    DBHelper db = new DBHelper(getApplicationContext());
+                    db.insertReview(review, hotelName);
+                    Snackbar.make(activity_detailRL, "            Review Submitted               ", Snackbar.LENGTH_LONG).show();
+                    reviewETDetailFragment.setText("");
+                }else{
 
+                   Snackbar.make(activity_detailRL, "              Right Some Review First               ", Snackbar.LENGTH_LONG).show();
+
+                }
             }
         });
 
-        reviewETDetailFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(view,0);
-
-            }
-        });
+//        reviewETDetailFragment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(view,0);
+//
+//            }
+//        });
 
 
     }
