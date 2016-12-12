@@ -48,12 +48,11 @@ public class DetailActivity extends AppCompatActivity {
     String LONGITUDE;
     String REVIEW ;
     String VOTES;
-
     //----------------- hide keyboard when editText not in Focus
-    public void hideKeyboard(View view) {//hideKeyboard(view)
-        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-    }
+//    public void hideKeyboard(View view) {
+//        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -146,13 +145,10 @@ public class DetailActivity extends AppCompatActivity {
             reviewLLDetailActivity.setVisibility(View.INVISIBLE);
         }
 
-
-
         reviewSubmitBtnDetailFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               String review =  reviewETDetailFragment.getText().toString();
-
                 DBHelper db = new DBHelper(getApplicationContext());
                 db.insertReview(review,hotelName);
                 reviewLLDetailActivity.setVisibility(View.INVISIBLE);
@@ -160,12 +156,16 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        activity_detailRL.setOnClickListener(new View.OnClickListener() {
+        reviewETDetailFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeyboard(view);
+
+        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view,0);
+
             }
         });
+
 
     }
 }

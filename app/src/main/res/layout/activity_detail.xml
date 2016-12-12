@@ -5,8 +5,7 @@
     android:id="@+id/activity_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.swarnim_d.nearbyrestaurants.Activity.DetailActivity"
-    android:onClick="hideKeyboard">
+    tools:context="com.example.swarnim_d.nearbyrestaurants.Activity.DetailActivity">
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -15,7 +14,6 @@
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:onClick="hideKeyboard"
     >
     <ImageView
         android:id="@+id/imageIVDetailFragment"
@@ -83,8 +81,7 @@
                 android:orientation="vertical"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:paddingTop="35dp"
-                android:onClick="hideKeyboard">
+                android:paddingTop="35dp">
 
                 <LinearLayout
                     android:layout_height="30dp"

@@ -1,18 +1,15 @@
 package com.example.swarnim_d.nearbyrestaurants.Activity;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
 import com.example.swarnim_d.nearbyrestaurants.Model.RestResponse;
 import com.example.swarnim_d.nearbyrestaurants.R;
@@ -35,8 +32,6 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
-
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener,GoogleMap.OnInfoWindowClickListener {
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -48,6 +43,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     LatLng latLng;
     ArrayList<RestResponse.Restaurants.RestDetails> restDetailsArrayList;
     String mHotelID;
+    RelativeLayout mapActivityRL;
+
+    //-----------------------------Storage permission-----------------------------------for marshmallow
+    public boolean checkStoragePerm() {
+        if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            }
+            else {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 
 
@@ -94,8 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
             @Override
-
-            public void onFailure(Throwable t) {Log.e("onFailure", t.toString());}
+            public void onFailure(Throwable t) {Log.e("onFailure",t.toString());}
         });
     }
 
@@ -104,11 +114,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        mapActivityRL = (RelativeLayout)findViewById(R.id.activity_map);
 
+        Snackbar snackbar = Snackbar.make(mapActivityRL, "Best Hotels Around You", Snackbar.LENGTH_LONG);
+        snackbar.show();
 
-
-
-
+        checkStoragePerm();
 
         //------code for gps location fetching--------------
         gpsTracker = new GPSTracker(this);
@@ -121,8 +132,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -133,16 +142,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         //-------------calling Zomato api geocode----------------------
         callingApiForNearByRestaurants();
+
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
 
     }
 
-
     @Override
     public boolean onMarkerClick(Marker marker) {
-
-
+//        Snackbar snackbar = Snackbar
+//                .make(mapActivityRL, "Welcome to AndroidHive", Snackbar.LENGTH_LONG);
+//
+//        snackbar.show();
 
         return false;
     }

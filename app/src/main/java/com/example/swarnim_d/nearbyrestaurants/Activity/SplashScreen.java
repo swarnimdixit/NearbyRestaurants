@@ -20,37 +20,26 @@ public class SplashScreen extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final long SPLASH_TIME_OUT = 3000;
+    boolean enable;
+
+
 
     //-------------------------------------------check Location permmision --------for marshmallow
-    private void checkLocationPerm() {
+    private boolean checkLocationPerm() {
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.ACCESS_FINE_LOCATION)) {
-                }
-            }else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        SplashScreen.PERMISSION_REQUEST_CODE);
-            }
-        }
-    }
 
-    //-----------------------------Storage permission-----------------------------------for marshmallow
-    public boolean checkStoragePerm() {
-        if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        1);
-            }
-            else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION) ;
+                //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
+
+            }else {
+
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},SplashScreen.PERMISSION_REQUEST_CODE);
                 return false;
             }
         }
-
         return true;
     }
 
@@ -60,7 +49,7 @@ public class SplashScreen extends AppCompatActivity {
     //-----------------------------------check if gps is ON or OFF---------------
     private void checkGPSEnabled() {
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        boolean enable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        enable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!enable) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
@@ -83,26 +72,17 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        checkGPSEnabled();
-        checkLocationPerm();
-        checkStoragePerm();
+
         new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-
             @Override
             public void run() {
+                checkGPSEnabled();
+                checkLocationPerm();
                 // This method will be executed once the timer is over
                 // Start your app main activity
-//                checkGPSEnabled();
-//                checkLocationPerm();
-//                checkStoragePerm();
-                Intent intent = new Intent(SplashScreen.this,MapActivity.class);
-                startActivity(intent);
-                finish();
+                        Intent intent = new Intent(SplashScreen.this,MapActivity.class);
+                        startActivity(intent);
+                        finish();
             }
         }, SPLASH_TIME_OUT);
 
