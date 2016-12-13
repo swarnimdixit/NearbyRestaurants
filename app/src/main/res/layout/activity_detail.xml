@@ -10,37 +10,34 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     android:id="@+id/imageRLDetailFragment"
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    >
+    android:layout_alignParentStart="true">
     <ImageView
         android:id="@+id/imageIVDetailFragment"
         android:layout_width="match_parent"
         app:srcCompat="@drawable/default_image"
         android:scaleType="fitXY"
-        android:layout_height="300dp">
+        android:layout_height="280dp">
         </ImageView>
 
     <TextView android:layout_width="match_parent"
-        android:layout_alignParentTop="false"
-        android:layout_alignBottom="@+id/imageIVDetailFragment"
         android:id="@+id/ratingTVOnIVDetailFragment"
         android:background="@color/colorAccent"
         android:text="4.4"
         android:textColor="@android:color/background_light"
         android:autoText="true"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:typeface="monospace"
+        android:typeface="normal"
         android:layout_height="40dp"
-        android:paddingTop="5dp"
         android:backgroundTintMode="src_in"
-        android:layout_centerVertical="false"
-        android:layout_alignParentBottom="false">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false">
         </TextView>
 </RelativeLayout>
 
@@ -72,7 +69,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/restaurantTVDetailFrag"
         android:background="@color/colorPrimary"
-        >
+        android:layout_marginTop="10dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -175,7 +172,7 @@
                         android:layout_height="match_parent"
                         android:layout_width="wrap_content"
                         android:layout_marginRight="5dp"
-                        android:text="Level : "
+                        android:text="Rated : "
                         android:textSize="18dp"
                         android:textStyle="bold"/>
 
@@ -216,12 +213,13 @@
                         android:id="@+id/votesTVDetailFrag" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_height="120dp"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_marginBottom="20dp"
                     android:paddingLeft="20dp"
-                    android:background="@color/cast_expanded_controller_text_color">
+                    android:background="@color/cast_expanded_controller_text_color"
+                    android:paddingRight="20dp"
+                    android:layout_height="150dp">
                     <TextView
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
@@ -230,7 +228,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:id="@+id/addressTVDetailFragment"
-                        android:layout_weight="1" />
+                        android:layout_weight="2" />
 
                     <ImageButton
                         android:layout_height="match_parent"
@@ -241,14 +239,17 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:id="@+id/imageIBDetailFragment"
                         android:background="@drawable/image_direction"
-                        android:layout_weight="3" />
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"/>
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_marginBottom="20dp"
-                    android:background="@color/cast_expanded_controller_text_color">
+                    android:background="@color/cast_expanded_controller_text_color"
+                    android:id="@+id/reviewShowLLDetailFragment">
                     <TextView
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
@@ -268,7 +269,11 @@
                     android:layout_marginBottom="20dp"
                     android:id="@+id/reviewLLDetailFragment"
                     android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
                     <EditText
+                        android:layout_height="80dp"
                         android:layout_width="match_parent"
                         android:layout_marginRight="5dp"
                         android:paddingLeft="10dp"
@@ -278,18 +283,20 @@
                         android:layout_weight="1"
                         android:background="@color/cast_expanded_controller_progress_text_color"
                         android:hint="Give review here..."
-                        android:layout_height="80dp"
-                        />
 
+                        android:textColorHint="@android:color/holo_green_light" />
+                    </android.support.design.widget.TextInputLayout>
                     <Button
                         android:layout_height="50dp"
                         android:layout_width="match_parent"
-                        android:text="Submit"
-                        android:textSize="18dp"
-                        android:textStyle="bold|italic"
+                        android:text="S u b m i t"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:id="@+id/reviewSubmitBtnDetailFragment"
-                        android:background="@android:color/holo_red_light" />
+                        android:background="@color/wallet_highlighted_text_holo_light"
+                        android:paddingBottom="3dp"
+                        android:typeface="monospace" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

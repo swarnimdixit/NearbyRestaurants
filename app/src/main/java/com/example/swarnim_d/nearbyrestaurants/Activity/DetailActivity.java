@@ -34,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageButton imageNavigationIBDetailActivity;
     EditText reviewETDetailFragment;
     Button reviewSubmitBtnDetailFragment;
-    LinearLayout reviewLLDetailActivity;
+    LinearLayout reviewLLDetailActivity,reviewShowLLDetailActivity;
     RelativeLayout activity_detailRL;
 
     String IMAGE_URL;
@@ -77,6 +77,7 @@ public class DetailActivity extends AppCompatActivity {
         reviewLLDetailActivity = (LinearLayout)findViewById(R.id.reviewLLDetailFragment);
         reviewTVDetailActivity = (TextView)findViewById(R.id.reviewTVDetailFragment);
         activity_detailRL = (RelativeLayout)findViewById(R.id.activity_detail);
+        reviewShowLLDetailActivity = (LinearLayout)findViewById(R.id.reviewShowLLDetailFragment);
         reviewLLDetailActivity.setVisibility(View.VISIBLE);
 
 
@@ -148,35 +149,28 @@ public class DetailActivity extends AppCompatActivity {
 
         if(REVIEW != null) {
             reviewTVDetailActivity.setText("Review: "+REVIEW);
-            reviewLLDetailActivity.setVisibility(View.INVISIBLE);
+           // reviewLLDetailActivity.setVisibility(View.INVISIBLE);
         }
 
         reviewSubmitBtnDetailFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String review = reviewETDetailFragment.getText().toString();
-                if(review !="") {
+                if(!review.equals("")) {
                     DBHelper db = new DBHelper(getApplicationContext());
                     db.insertReview(review, hotelName);
-                    Snackbar.make(activity_detailRL, "            Review Submitted               ", Snackbar.LENGTH_LONG).show();
+
+                    Snackbar snackbar = Snackbar.make(activity_detailRL, "             Review Submitted               ", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     reviewETDetailFragment.setText("");
                 }else{
 
-                   Snackbar.make(activity_detailRL, "              Right Some Review First               ", Snackbar.LENGTH_LONG).show();
+                   Snackbar.make(activity_detailRL, "                Right Some Review First               ", Snackbar.LENGTH_LONG).show();
 
                 }
             }
         });
 
-//        reviewETDetailFragment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//        InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        imm.showSoftInput(view,0);
-//
-//            }
-//        });
 
 
     }
