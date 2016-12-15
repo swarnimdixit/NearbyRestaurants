@@ -37,16 +37,13 @@ public class SplashScreen extends AppCompatActivity {
             }else {
 
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},SplashScreen.PERMISSION_REQUEST_CODE);
-                return false;
+
+
             }
         }
         return true;
     }
 
-
-
-
-    //-----------------------------------check if gps is ON or OFF---------------
     private void checkGPSEnabled() {
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         enable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -71,13 +68,14 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        checkLocationPerm();
 
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                checkLocationPerm();
+
                 checkGPSEnabled();
                 // This method will be executed once the timer is over
                 // Start your app main activity

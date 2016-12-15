@@ -84,7 +84,8 @@
                 android:layout_alignParentStart="true"
                 android:paddingTop="35dp"
                 android:onClick="hideKeyboard"
-                android:soundEffectsEnabled="true">
+                android:soundEffectsEnabled="true"
+                android:weightSum="1">
 
                 <LinearLayout
                     android:layout_height="30dp"
@@ -219,7 +220,7 @@
                     android:paddingLeft="20dp"
                     android:background="@color/cast_expanded_controller_text_color"
                     android:paddingRight="20dp"
-                    android:layout_height="150dp">
+                    android:layout_height="200dp">
                     <TextView
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
@@ -228,7 +229,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:id="@+id/addressTVDetailFragment"
-                        android:layout_weight="2" />
+                        android:layout_weight="3" />
 
                     <ImageButton
                         android:layout_height="match_parent"
@@ -298,6 +299,18 @@
                         android:paddingBottom="3dp"
                         android:typeface="monospace" />
                 </LinearLayout>
+
+                <!--<ImageButton-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_width="250dp"-->
+                    <!--android:layout_marginTop="50dp"-->
+                    <!--android:id="@+id/reviewsByUsersDetailFragment"-->
+                    <!--android:text="User Reviews"-->
+                    <!--android:layout_weight="0.01"-->
+                    <!--android:gravity="bottom|right|center_vertical|center_horizontal|end"-->
+                    <!--android:layout_gravity="right"-->
+                    <!--android:background="@drawable/review_button" />-->
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

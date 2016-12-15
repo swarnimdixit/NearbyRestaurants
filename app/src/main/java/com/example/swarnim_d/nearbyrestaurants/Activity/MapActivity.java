@@ -1,6 +1,7 @@
 package com.example.swarnim_d.nearbyrestaurants.Activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -43,6 +44,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<RestResponse.Restaurants.RestDetails> restDetailsArrayList;
     String mHotelID;
     RelativeLayout mapActivityRL;
+    ProgressDialog pd;
 
     //-----------------------------Storage permission-----------------------------------for marshmallow
     public boolean checkStoragePerm() {
@@ -59,15 +61,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         return true;
     }
 
-
-
-
     //--------------------Setting Marker-------------------------------
     public void Setmarker(String hotelname, LatLng hotelLocation, String ACFT) {
         mMap.addMarker(new MarkerOptions().position(hotelLocation).title(hotelname).snippet("Cost For Two : "+ACFT).icon(BitmapDescriptorFactory.fromResource(R.drawable.food)).alpha(0.8f));
     }
 
-    //-----------------------------------------------------retrofit------------------------
+    //-----------------------------------------------------API CALL------------------------
     public void callingApiForNearByRestaurants(){
         ApiInterface apiServices = ApiClient.getClient().create(ApiInterface.class);
         Call<RestResponse> call = apiServices.getRestaurants(lat, lon);
@@ -114,11 +113,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         mapActivityRL = (RelativeLayout)findViewById(R.id.activity_map);
+        pd = new ProgressDialog(this);
+        pd.setMessage("Loading Please Wait");
+        pd.show();
 
         Snackbar snackbar = Snackbar.make(mapActivityRL, "                  Best Hotels Around You               ", Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
 
         checkStoragePerm();
+
+
 
         //------code for gps location fetching--------------
         gpsTracker = new GPSTracker(this);
@@ -133,6 +137,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {return;}
         mMap.setMyLocationEnabled(true);
@@ -140,7 +145,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(lat,lon) , 15.0f));
 
         //-------------calling Zomato api geocode----------------------
-        callingApiForNearByRestaurants();
+
+            callingApiForNearByRestaurants();
+
+        pd.dismiss();
 
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
@@ -164,4 +172,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         intent.putExtra("hotelname",mHotelname);
         startActivity(intent);
     }
+
+
+
 }

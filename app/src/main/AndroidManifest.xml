@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.swarnim_d.nearbyrestaurants">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!-- External storage for caching. -->
@@ -25,6 +24,11 @@
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/food"
@@ -43,8 +47,11 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDGr5jKu6n5YiAyvE5B_HLOWtBp8VaWZKM" />
 
-        <activity android:name=".Activity.DetailActivity" />
-        <activity android:name=".Activity.MapActivity"></activity>
+        <activity
+            android:name=".Activity.DetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.MapActivity" />
+        <activity android:name=".Activity.UserReview"></activity>
     </application>
 
 </manifest>

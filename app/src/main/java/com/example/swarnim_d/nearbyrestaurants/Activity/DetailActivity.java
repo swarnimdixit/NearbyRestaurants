@@ -10,7 +10,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -31,9 +30,9 @@ public class DetailActivity extends AppCompatActivity {
     ImageView imageViewDetailActivity;
     TextView nameTVDetailActivity,cuisineTVDetailActivity,costForTwoTVDetailActivity,localityTVDetailActivity;
     TextView ratingTextTVDetailActivity,ratingTVDetailActivity,votesTVDetailActivity,addressTVDetailActivity,reviewTVDetailActivity;
-    ImageButton imageNavigationIBDetailActivity;
+    ImageButton imageNavigationIBDetailActivity,userReviewBtnDetailActivity;
     EditText reviewETDetailFragment;
-    Button reviewSubmitBtnDetailFragment;
+    Button reviewSubmitBtnDetailActivity;
     LinearLayout reviewLLDetailActivity,reviewShowLLDetailActivity;
     RelativeLayout activity_detailRL;
 
@@ -49,7 +48,8 @@ public class DetailActivity extends AppCompatActivity {
     String LONGITUDE;
     String REVIEW ;
     String VOTES;
-    //----------------- hide keyboard when editText not in Focus
+    String HOTEL_ID;
+
     public void hideKeyboard(View view) {
         InputMethodManager imm =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(),0);
@@ -60,8 +60,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-
         imageViewDetailActivity = (ImageView)findViewById(R.id.imageIVDetailFragment);
         nameTVDetailActivity = (TextView)findViewById(R.id.restaurantTVDetailFrag);
         cuisineTVDetailActivity =  (TextView)findViewById(R.id.cusineTVDetailFrag);
@@ -73,13 +71,13 @@ public class DetailActivity extends AppCompatActivity {
         addressTVDetailActivity =(TextView)findViewById(R.id.addressTVDetailFragment);
         imageNavigationIBDetailActivity = (ImageButton)findViewById(R.id.imageIBDetailFragment);
         reviewETDetailFragment = (EditText)findViewById(R.id.reviewETDetailFragment) ;
-        reviewSubmitBtnDetailFragment = (Button)findViewById(R.id.reviewSubmitBtnDetailFragment);
+        reviewSubmitBtnDetailActivity = (Button)findViewById(R.id.reviewSubmitBtnDetailFragment);
         reviewLLDetailActivity = (LinearLayout)findViewById(R.id.reviewLLDetailFragment);
         reviewTVDetailActivity = (TextView)findViewById(R.id.reviewTVDetailFragment);
         activity_detailRL = (RelativeLayout)findViewById(R.id.activity_detail);
         reviewShowLLDetailActivity = (LinearLayout)findViewById(R.id.reviewShowLLDetailFragment);
+       // userReviewBtnDetailActivity = (ImageButton)findViewById(R.id.reviewsByUsersDetailFragment);
         reviewLLDetailActivity.setVisibility(View.VISIBLE);
-
 
 
             //----------------- receiving hotelid from map activity------------
@@ -90,9 +88,13 @@ public class DetailActivity extends AppCompatActivity {
         Cursor rs = db.getData(hotelName);
         rs.moveToFirst();
         if (rs!= null){
+
+            //HOTEL_ID = rs.getString(rs.getColumnIndex("hotelid"));
+
             String HOTEL_NAME = rs.getString(rs.getColumnIndex("name"));
 
             nameTVDetailActivity.setText(HOTEL_NAME);
+
 
             IMAGE_URL = rs.getString(rs.getColumnIndex("thumbnail"));
 
@@ -126,9 +128,9 @@ public class DetailActivity extends AppCompatActivity {
             VOTES = rs.getString(rs.getColumnIndex("votes"));
             votesTVDetailActivity.setText(VOTES);
 
+
+
         }
-
-
 
 
         imageNavigationIBDetailActivity.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +142,14 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+//        userReviewBtnDetailActivity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(),UserReview.class);
+//                intent.putExtra("hotelid",Integer.parseInt(HOTEL_ID));
+//                startActivity(intent);
+//            }
+//        });
 
         //----------------setting image from internet (URL)--------------------
         Picasso.with(DetailActivity.this)
@@ -152,21 +162,18 @@ public class DetailActivity extends AppCompatActivity {
            // reviewLLDetailActivity.setVisibility(View.INVISIBLE);
         }
 
-        reviewSubmitBtnDetailFragment.setOnClickListener(new View.OnClickListener() {
+        reviewSubmitBtnDetailActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String review = reviewETDetailFragment.getText().toString();
                 if(!review.equals("")) {
                     DBHelper db = new DBHelper(getApplicationContext());
                     db.insertReview(review, hotelName);
-
                     Snackbar snackbar = Snackbar.make(activity_detailRL, "             Review Submitted               ", Snackbar.LENGTH_LONG);
                     snackbar.show();
                     reviewETDetailFragment.setText("");
                 }else{
-
                    Snackbar.make(activity_detailRL, "                Right Some Review First               ", Snackbar.LENGTH_LONG).show();
-
                 }
             }
         });
