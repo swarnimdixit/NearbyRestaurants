@@ -142,15 +142,6 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-//        userReviewBtnDetailActivity.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(),UserReview.class);
-//                intent.putExtra("hotelid",Integer.parseInt(HOTEL_ID));
-//                startActivity(intent);
-//            }
-//        });
-
         //----------------setting image from internet (URL)--------------------
         Picasso.with(DetailActivity.this)
                 .load(IMAGE_URL)

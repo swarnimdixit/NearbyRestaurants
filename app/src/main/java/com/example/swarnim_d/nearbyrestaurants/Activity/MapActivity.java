@@ -46,22 +46,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     RelativeLayout mapActivityRL;
     ProgressDialog pd;
 
-    //-----------------------------Storage permission-----------------------------------for marshmallow
     public boolean checkStoragePerm() {
         if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             }
-            else {
-                return false;
-            }
+            else {return false;}
         }
-
         return true;
     }
 
-    //--------------------Setting Marker-------------------------------
+
     public void Setmarker(String hotelname, LatLng hotelLocation, String ACFT) {
         mMap.addMarker(new MarkerOptions().position(hotelLocation).title(hotelname).snippet("Cost For Two : "+ACFT).icon(BitmapDescriptorFactory.fromResource(R.drawable.food)).alpha(0.8f));
     }
@@ -112,7 +108,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
         mapActivityRL = (RelativeLayout)findViewById(R.id.activity_map);
+
         pd = new ProgressDialog(this);
         pd.setMessage("Loading Please Wait");
         pd.show();
